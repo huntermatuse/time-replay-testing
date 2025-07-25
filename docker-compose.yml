@@ -1,0 +1,11 @@
+services:
+  core-gateway:
+    image: huntermatusegpa/dev8:${IGNITION_VERSION:-8.1.48}
+    ports:
+      - 19090:8088
+      - 19098:8043
+    environment:
+      TZ: America/NewYork
+      GATEWAY_ADMIN_PASSWORD: ${GATEWAY_PASSWORD:-password}
+    volumes:
+      - ./ignition-files:/workdir
