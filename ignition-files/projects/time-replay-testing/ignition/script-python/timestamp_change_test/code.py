@@ -37,3 +37,19 @@ def make_testing_tag():
 		return True
 	except Exception as e:
 		return str(e)
+		
+def timestamp_future_change_test():
+	tag_prep = make_testing_tag()
+	if tag_prep != True:
+		return tag_prep
+	current_time = system.date.now()
+	three_days_ahead = system.date.addDays(current_time, +3)
+	tag_value = BasicTagValue(44, DataQuality.GOOD_DATA)
+	tag_value.setTimestamp(Date(three_days_ahead.time))
+	tag_path = "[default]change_me"
+	result = system.tag.writeBlocking([tag_path], [tag_value])
+	
+	if result[0].isGood():
+		return "wrote value 44 to 'change_me' with timestamp: %s" % three_days_ahead
+	else:
+		return "Write failed: %s" % result[0]
