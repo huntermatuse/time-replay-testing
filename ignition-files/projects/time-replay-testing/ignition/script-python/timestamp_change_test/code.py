@@ -43,7 +43,7 @@ def timestamp_future_change_test():
 	if tag_prep != True:
 		return tag_prep
 	current_time = system.date.now()
-	three_days_ahead = system.date.addDays(current_time, +3)
+	three_days_ahead = system.date.addDays(current_time, 3)
 	tag_value = BasicTagValue(44, DataQuality.GOOD_DATA)
 	tag_value.setTimestamp(Date(three_days_ahead.time))
 	tag_path = "[default]change_me"
